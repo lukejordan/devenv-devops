@@ -1,0 +1,8 @@
+---
+- hosts: all
+  remote_user: vagrant
+  tasks:
+  - name: make sure apache is running
+    service: name=apache2 state=started
+    become: yes
+    become_method: sudo
