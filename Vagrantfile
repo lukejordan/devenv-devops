@@ -56,7 +56,8 @@ Vagrant.configure(2) do |config|
     config.vm.provision "ansible" do |ansible|
         ansible.playbook = "playbook.yml"
     end
-
+  # config.vm.provision :shell, path: "bootstrap.sh"
+    
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
   # such as FTP and Heroku are also available. See the documentation at
   # https://docs.vagrantup.com/v2/push/atlas.html for more information.
