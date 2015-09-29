@@ -1,0 +1,10 @@
+---
+- hosts: all
+  remote_user: vagrant
+  tasks:
+#  - apt: name=apache2 state=absent
+#    become: yes
+#    become_method: sudo
+  - service: name=apache2 state=stopped
+    become: yes
+    become_method: sudo

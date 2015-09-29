@@ -2,6 +2,9 @@
 - hosts: all
   remote_user: vagrant
   tasks:
+  - apt: update_cache=yes
+    become: yes
+    become_method: sudo
   - apt: name=apache2 state=present
     become: yes
     become_method: sudo
@@ -9,4 +12,24 @@
     service: name=apache2 state=started
     become: yes
     become_method: sudo
+#  - copy: src=./aem dest=/opt owner=vagrant group=vagrant mode=0644
+#    become: yes
+#    become_method: sudo
+  - copy: src=./script dest=/opt/devscript owner=vagrant group=vagrant mode=0644
+    become: yes
+    become_method: sudo
+  - name: installing java7
+  # Installer is interactive so force all answers to yes.
+  # http://askubuntu.com/a/190674/67778
+    shell: echo debconf shared/accepted-oracle-license-v1-1 select true |
+         debconf-set-selections && 
+         echo debconf shared/accepted-oracle-license-v1-1 seen true | 
+         debconf-set-selections &&
+         apt-get -y install openjdk-7-jdk
+    become: yes
+    become_method: sudo
+#  - name: Execute the script
+#    command: sh /opt/devscript/script/aem-auth-start.sh
+#    become: yes
+#    become_method: sudo
     
