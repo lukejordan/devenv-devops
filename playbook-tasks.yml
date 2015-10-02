@@ -1,0 +1,13 @@
+---
+- hosts: all
+  remote_user: vagrant
+  roles:
+    - { role: all }
+    
+  tasks:
+  - apt: update_cache=yes
+    become: yes
+    become_method: sudo
+  - include: tasks/apache/start.yml
+  - include: tasks/aem/setup.yml
+  - include: tasks/java/install.yml

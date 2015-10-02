@@ -1,0 +1,13 @@
+---
+  - name: Copy the AEM platform
+    copy: src=./aem dest=/opt owner=vagrant group=vagrant mode=0644
+  #force=no
+    become: yes
+    become_method: sudo
+  - copy: src=./script dest=/opt/devscript owner=vagrant group=vagrant mode=0644
+    become: yes
+    become_method: sudo
+  - name: Execute the script
+    command: sh /opt/devscript/script/aem-auth-start.sh
+    become: yes
+    become_method: sudo
