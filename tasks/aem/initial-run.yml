@@ -1,0 +1,7 @@
+---
+ - name: Execute the script
+   command: sh /opt/devscript/script/aem-auth-start.sh
+   async: 45
+   poll: 0
+   become: yes
+   become_method: sudo
