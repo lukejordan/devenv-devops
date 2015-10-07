@@ -1,0 +1,6 @@
+---
+# tasks file for common
+  - name: APACHE!!!
+    apt: name=apache2 state=present
+    become: yes
+    become_method: sudo
