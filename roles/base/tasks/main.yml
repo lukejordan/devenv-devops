@@ -1,0 +1,11 @@
+---
+# tasks file for base
+- name: Update apt cache
+  apt: update_cache=yes
+  become: yes
+  become_method: sudo
+- name: Install apache httpd
+  apt: name=apache2 state=present
+  become: yes
+  become_method: sudo
+- include: tasks/apache/start.yml

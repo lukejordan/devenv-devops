@@ -1,0 +1,3 @@
+---
+# tasks file for aem-init
+ - include: tasks/aem/initial-run.yml
