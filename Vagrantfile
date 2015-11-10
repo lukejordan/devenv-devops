@@ -5,25 +5,40 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-Vagrant.configure(2) do |config|
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
+  config.vm.provision :hosts do |provisioner|
+    provisioner.autoconfigure = true
+
+    provisioner.add_host '192.168.56.18', ['aem.local.com', 'aem' ]
+    #provisioner.add_host '192.168.56.14', ['web2.local.com', 'web2' ]
+    #provisioner.add_host '192.168.56.16', ['web2.local.com', 'web3' ]
+
+  end
+
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "precise32"
+  #config.vm.box = "precise32"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "http://files.vagrantup.com/precise32.box"
+  #config.vm.box_url = "http://files.vagrantup.com/precise32.box"
+
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network "forwarded_port", guest: 80, host: 4567
-  config.vm.network "forwarded_port", guest: 4502, host: 4568
-    
+#config.vm.network "forwarded_port", guest: 80, host: 4567
+#config.vm.network "forwarded_port", guest: 4502, host: 4568
+  #config.vm.network "private_network", ip: "192.168.50.4"
+
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
@@ -54,11 +69,11 @@ Vagrant.configure(2) do |config|
   # View the documentation for the provider you are using for more
   # information on available options.
 
-    config.vm.provision "ansible" do |ansible|
-        ansible.playbook = "playbook.yml"
-    end
+    #config.vm.provision "ansible" do |ansible|
+    #    ansible.playbook = "playbook-setup.yml"
+    #end
   # config.vm.provision :shell, path: "bootstrap.sh"
-    
+
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
   # such as FTP and Heroku are also available. See the documentation at
   # https://docs.vagrantup.com/v2/push/atlas.html for more information.
@@ -74,4 +89,23 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get update
   #   sudo apt-get install -y apache2
   # SHELL
+
+
+  config.vm.define "aem" do |aem|
+
+    #web1.vm.box = "centos-6-6-small"
+    aem.vm.box = "p0bailey/centos-6-6-small"
+    aem.vm.network :private_network, ip: "192.168.56.18"
+    aem.vm.hostname = "aem.local.com"
+    aem.ssh.insert_key = false
+
+    aem.vm.provider "virtualbox" do |v|
+        v.customize [ "modifyvm", :id, "--cpus", "1" ]
+        v.customize [ "modifyvm", :id, "--memory", "4096" ]
+        v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    end
+
+  end
+
+
 end
