@@ -1,3 +1,7 @@
 ---
 # tasks file for aem-init
- - include: tasks/aem/initial-run.yml
+ # - include: tasks/aem/initial-run.yml
+ - name: Execute the script
+   command: sh /opt/script/aem-auth-start.sh
+   async: 45
+   poll: 0

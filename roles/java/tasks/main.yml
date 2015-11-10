@@ -1,2 +1,4 @@
 ---
-  - include: tasks/java/install.yml
+#  - include: tasks/java/install.yml
+ - name: install the latest version of java
+   yum: name=java-1.6.0-openjdk state=latest
