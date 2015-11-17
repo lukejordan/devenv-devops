@@ -3,4 +3,31 @@
  #   apt: name=apache2 state=present
  #   become: yes
  #   become_method: sudo
- - include: tasks/aem/setup.yml
+# - include: tasks/aem/setup.yml
+  - name: Copy the AEM platform - author
+    copy: src=./aem dest=/opt owner=vagrant group=vagrant mode=0644
+  #force=no
+    become: yes
+    become_method: sudo
+  - name: Copy the AEM platform - publish jar
+    copy: src=./aem/author/cq-author-4502.jar dest=/opt/aem/publish/cq-publish-4503.jar owner=vagrant group=vagrant mode=0644
+  #force=no
+    become: yes
+    become_method: sudo
+  - name: Copy the AEM platform - publish license
+    copy: src=./aem/author/license.properties dest=/opt/aem/publish owner=vagrant group=vagrant mode=0644
+  #force=no
+    become: yes
+    become_method: sudo
+  - name: Copy the AEM scripts
+    copy: src=./script dest=/opt/devscript owner=vagrant group=vagrant mode=0644
+    become: yes
+    become_method: sudo
+#  - name: Create the publish instance folder
+#    synchronize: mode=pull src=/opt/aem/aem dest=/opt/aem/publish
+#    delegate_to: "{{inventory_hostname}}"
+
+
+
+
+#cq-author-4502.jar
