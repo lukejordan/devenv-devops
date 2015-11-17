@@ -1,2 +1,2 @@
 cd /opt/aem/author
-java -Xmx2G -jar cq-author-4502.jar
+java -Xmx2048M -Xmx2048M -jar cq-author-4502.jar
