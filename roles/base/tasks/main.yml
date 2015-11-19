@@ -1,11 +1,27 @@
 ---
 # tasks file for base
-# - name: Update apt cache
-#   apt: update_cache=yes
-#   become: yes
-#   become_method: sudo
-# - name: Install apache httpd
-#   apt: name=apache2 state=present
-#   become: yes
-#   become_method: sudo
-# - include: tasks/apache/start.yml
+#  - { role: ../roles/ntp-centos6 }
+  #- { role: ../roles/java-centos6 }
+  #  - { role: ../roles/jenkins-centos6 }
+  #- { role: ../roles/nexus-centos6 }
+  # - name: Add Jenkins gpg key
+  #   rpm_key: state=present key=http://apt.sw.be/RPM-GPG-KEY.dag.txt
+  # - command: wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+  # - command: rpm -K rpmforge-release-0.5.3-1.el6.rf.*.rpm
+  # - command: rpm -i rpmforge-release-0.5.3-1.el6.rf.*.rpm
+  #- script: rpmforge_repo_setup.sh
+  #- command: yum --disablerepo=base,updates,info --enablerepo=rpmforge-extras info git
+  #yum --disablerepo=base,updates,info --enablerepo=rpmforge-extras info git
+#  - name: Install Jenkins stable
+#    yum: name=jenkins state=latest
+- name: install the 'Development tools' package group
+  yum: name="@Development tools" state=present
+- name: install other 'tools'
+  yum: name=zlib-devel,perl-ExtUtils-MakeMaker,asciidoc,xmlto,openssl-devel state=present
+#- name: download git
+#  get_url: url=https://github.com/git/git/archive/master.zip dest=/home/vagrant/git.zip mode=0440
+- name: Extract nexus to destination
+  unarchive: src=/home/vagrant/git.zip dest=/home/vagrant copy=no creates=/home/vagrant/unzipped
+#  unarchive: src=https://github.com/git/git/archive/master.zip dest=/home/vagrant copy=no creates=/home/vagrant/unzipped
+- name: install git
+  script: git-install.sh
