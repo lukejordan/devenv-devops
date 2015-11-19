@@ -1,0 +1,11 @@
+---
+# tasks file for nexus-centos6
+- name: "Create directory for nexus for ci user: {{ ci_user }}"
+  file: path=/opt/nexus state=directory mode=0755 owner={{ ci_user }}
+  become: yes
+  become_method: sudo
+- name: Extract nexus to destination
+  unarchive: src=nexus-2.11.4-01-bundle.tar.gz dest=/opt/nexus
+#- shell: chown -R vagrant /opt/nexus
+- name: Start nexus repository
+  command: /opt/nexus/nexus-2.11.4-01/bin/nexus start
