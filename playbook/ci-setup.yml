@@ -1,0 +1,10 @@
+---
+ - hosts: ci
+   remote_user: vagrant
+
+   roles:
+     - { role: ../roles/base, sudo: yes }
+     - { role: ../roles/ntp-centos6, sudo: yes }
+     - { role: ../roles/java-centos6, sudo: yes }
+     - { role: ../roles/jenkins-centos6, sudo: yes }
+     - { role: ../roles/nexus-centos6 }
