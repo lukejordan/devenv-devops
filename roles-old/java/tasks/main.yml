@@ -1,0 +1,4 @@
+---
+  # tasks file for tomcat-cento6
+ - name: install the latest version of java
+   apt-get: name=java state=latest

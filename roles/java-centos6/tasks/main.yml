@@ -1,0 +1,5 @@
+---
+# tasks file for tomcat-cento6
+
+- name: install the latest version of java
+  yum: name=java state=latest

@@ -1,0 +1,10 @@
+---
+# tasks file for ntp
+- name: install the latest version of libselinux-python
+  yum: name=libselinux-python state=latest
+
+- name: install the latest version of NTP server
+  yum: name=ntp state=latest
+
+- name: Start and Enable NTP server
+  service: name=ntpd state=started enabled=yes

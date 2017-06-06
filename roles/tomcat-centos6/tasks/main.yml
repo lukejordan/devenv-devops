@@ -1,0 +1,13 @@
+---
+# tasks file for tomcat-cento6
+
+- name: install the latest version of Tomcat
+  yum: name=tomcat6 state=latest
+
+- name: install the latest version of Tomcat webapps
+  yum: name=tomcat6-webapps state=latest
+
+- name: Start Tomcat
+  service: name=tomcat6 state=started enabled=yes
+
+- debug: msg="TomcatLog into http://192.168.56.30:8080"

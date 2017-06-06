@@ -20,8 +20,9 @@
   yum: name=zlib-devel,perl-ExtUtils-MakeMaker,asciidoc,xmlto,openssl-devel state=present
 #- name: download git
 #  get_url: url=https://github.com/git/git/archive/master.zip dest=/home/vagrant/git.zip mode=0440
-- name: Extract nexus to destination
+- name: Extract git to destination
   unarchive: src=/home/vagrant/git.zip dest=/home/vagrant copy=no creates=/home/vagrant/unzipped
 #  unarchive: src=https://github.com/git/git/archive/master.zip dest=/home/vagrant copy=no creates=/home/vagrant/unzipped
 - name: install git
   script: git-install.sh
+#- shell: git init chdir=/var/lib/jenkins

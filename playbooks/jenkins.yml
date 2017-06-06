@@ -1,0 +1,9 @@
+-
+  hosts: jenkins
+  sudo: yes
+
+  roles:
+    - { role: ../roles/ntp-centos6 }
+    - { role: ../roles/java-centos6 }
+    - { role: ../roles/jenkins-centos6 }
+  #  - { role: ../roles/nexus-centos6 }

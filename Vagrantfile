@@ -1,23 +1,17 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# All Vagrant configuration is done below. The "2" in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-# you're doing.
-
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # The most common configuration options are documented and commented below.
-  # For a complete reference, please see the online documentation at
-  # https://docs.vagrantup.com.
 
   config.vm.provision :hosts do |provisioner|
     provisioner.autoconfigure = true
 
     provisioner.add_host '192.168.56.18', ['aem.local.com', 'aem' ]
+    #provisioner.add_host '192.168.56.30', ['web.local.com', 'web' ]
+    #provisioner.add_host '192.168.56.40', ['web1.local.com', 'web1' ]
     #provisioner.add_host '192.168.56.14', ['web2.local.com', 'web2' ]
     #provisioner.add_host '192.168.56.16', ['web2.local.com', 'web3' ]
 
@@ -35,8 +29,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-#config.vm.network "forwarded_port", guest: 80, host: 4567
-#config.vm.network "forwarded_port", guest: 4502, host: 4568
+  #config.vm.network "forwarded_port", guest: 80, host: 4567
+  #config.vm.network "forwarded_port", guest: 4502, host: 4568
   #config.vm.network "private_network", ip: "192.168.50.4"
 
   # Create a private network, which allows host-only access to the machine

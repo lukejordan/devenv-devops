@@ -1,0 +1,5 @@
+---
+- hosts: local
+  remote_user: c1803977
+  roles:
+    - { role: apache-install-mac }

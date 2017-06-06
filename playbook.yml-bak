@@ -1,0 +1,26 @@
+---
+- hosts: all
+  remote_user: vagrant
+  tasks:
+  - apt: name=apache2 state=present
+    become: yes
+    become_method: sudo
+  - name: make sure apache is running
+    service: name=apache2 state=started
+    become: yes
+    become_method: sudo
+  - copy: src=./aem dest=/opt/aem owner=vagrant group=vagrant mode=0644
+    become: yes
+    become_method: sudo
+  - copy: src=./aem dest=/opt/aem owner=vagrant group=vagrant mode=0644
+    become: yes
+    become_method: sudo
+  - name: Move foo to bar
+    command: mv /path/to/foo /path/to/bar
+    become: yes
+    become_method: sudo
+#  - name: Execute the script
+#    command: sh /opt/devscript/script/aem-auth-start.sh
+#    become: yes
+#    become_method: sudo
+#java -Xmx1024M -jar cq5-author-p4502.jar

@@ -1,0 +1,5 @@
+---
+ - name: Copy the AEM scripts
+   copy: src=./script dest=/opt/devscript2 owner=vagrant group=vagrant mode=0644
+   become: yes
+   become_method: sudo
